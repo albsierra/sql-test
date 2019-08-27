@@ -3,7 +3,10 @@ $(document).ready(function(){
     // Clear any entered question text on modal hide
     var addModal = $("#addOrEditQuestion");
     addModal.on('hidden.bs.modal', function() {
+        $("#questionDatabase").val('');
+        $("#questionTables").val('');
         $("#questionText").val('');
+        $("#questionSolution").val('');
     });
     addModal.on('shown.bs.modal', function() {
         $("#questionText").focus();

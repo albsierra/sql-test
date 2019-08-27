@@ -31,7 +31,10 @@ $DATABASE_INSTALL = array(
     question_id   INTEGER NOT NULL AUTO_INCREMENT,
     sql_id         INTEGER NOT NULL,
     question_num  INTEGER NULL,
+    question_database  VARCHAR(45) NULL,
+    question_tables  TINYTEXT NULL,
     question_txt  TEXT NULL,   
+    question_solution  TEXT NULL,   
     modified      datetime NULL,
     
     CONSTRAINT `{$CFG->dbprefix}sql_ibfk_1`

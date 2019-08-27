@@ -25,7 +25,7 @@ $SetID = $_SESSION["sql_id"];
 $toolTitle = $SQL_DAO->getMainTitle($_SESSION["sql_id"]);
 
 if (!$toolTitle) {
-    $toolTitle = "Quick Write";
+    $toolTitle = "SQL Test";
 }
 
 $questions = $SQL_DAO->getQuestions($SetID);
@@ -63,9 +63,11 @@ $moreToSubmit = false;
                                 $answerId = $answer['answer_id'];
                                 $answerText = $answer['answer_txt'];
                             }
-
+// TODO Show tables schemas
                             echo('<div class="list-group-item">
                                 <h4>'.$question["question_txt"].'</h4>
+                                <h5><b>Database:</b> '.$question["question_database"].'</h5>
+                                <h6><b>Tables:</b> '.$question["question_tables"].'</h6>
                                 <p>');
 
                             if (!$answer || $answerText == "") {

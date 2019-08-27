@@ -87,6 +87,10 @@ $StudentList = $SQL_DAO->getUsersWithAnswers($mainId);
 
                                 echo ('<td class="question-col">
                                         '.$question["question_txt"].'
+                                        <br />
+                                        <b>Database:</b>'.$question["question_database"].'
+                                        <br />
+                                        <b>Tables:</b>'.$question["question_tables"].'
                                        </td>');
 
                                 if ($firstQuestion) {

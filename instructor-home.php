@@ -23,7 +23,7 @@ $OUTPUT->bodyStart();
 $toolTitle = $SQL_DAO->getMainTitle($_SESSION["sql_id"]);
 
 if (!$toolTitle) {
-    $toolTitle = "Quick Write";
+    $toolTitle = "SQL test";
 }
 
 $questions = $SQL_DAO->getQuestions($_SESSION["sql_id"]);
@@ -67,10 +67,15 @@ $totalQuestions = count($questions);
                         echo('
                         <div class="list-group-item">
                             <h4 id="questionText'.$question["question_id"].'">'.$question["question_txt"].'</h4>
+                            <h5 id="questionDatabase'.$question["question_id"].'"><b>Database:</b> '.$question["question_database"].'</h5>
+                            <h6 id="questionTables'.$question["question_id"].'"><b>Tables:</b> '.$question["question_tables"].'</h4>
                             <form id="questionTextForm'.$question["question_id"].'" action="actions/AddOrEditQuestion.php" method="post" style="display:none;">
                                 <p>
                                     <input type="hidden" name="questionId" value="'.$question["question_id"].'">
+                                    <input type="text" name="questionDatabase" value="'.$question["question_database"].'">
+                                    <input type="text" name="questionTables" value="'.$question["question_tables"].'">
                                     <textarea class="form-control" name="questionText" rows="4" required>'.$question["question_txt"].'</textarea>
+                                    <textarea class="form-control" name="questionSolution" rows="4" required>'.$question["question_solution"].'</textarea>
                                 </p>
                                 <div class="text-right">
                                     <input type="submit" class="btn btn-success" value="Save" form="questionTextForm'.$question["question_id"].'">
@@ -107,8 +112,14 @@ $totalQuestions = count($questions);
                 <form method="post" id="addQuestionForm" action="actions/AddOrEditQuestion.php">
                     <div class="modal-body">
                         <input type="hidden" name="questionId" id="questionId" value="-1">
+                        <label for="questionDatabase">Question Database</label>
+                        <input type="text" class="form-control" name="questionDatabase" value="" autofocus required >
                         <label for="questionText">Question Text</label>
-                        <textarea class="form-control" name="questionText" id="questionText" rows="4" autofocus required></textarea>
+                        <input type="text" class="form-control" name="questionTables" value="" required>
+                        <label for="questionText">Question Text</label>
+                        <textarea class="form-control" name="questionText" id="questionText" rows="4" required></textarea>
+                        <label for="questionText">Question Solution</label>
+                        <textarea class="form-control" name="questionSolution" id="questionSolution" rows="4" required></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
