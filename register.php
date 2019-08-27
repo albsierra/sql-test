@@ -15,12 +15,12 @@ $REGISTER_LTI2 = array(
     ),
     "source_url" => "https://github.com/udayton/mod-quickwrite",
     "screen_shots" => array(
-        "images/QW-Splash.jpg",
-        "images/QW-InstructorQuestions.jpg",
-        "images/QW-Instructor-ToolMenu.jpg",
-        "images/QW-InstructorQuestionResults.jpg",
-        "images/QW-InstructorAllResults.jpg",
-        "images/QW-StudentView.jpg",
-        "images/QW-StudentView-Answered.jpg",
+        "images/SQL-Splash.jpg",
+        "images/SQL-InstructorQuestions.jpg",
+        "images/SQL-Instructor-ToolMenu.jpg",
+        "images/SQL-InstructorQuestionResults.jpg",
+        "images/SQL-InstructorAllResults.jpg",
+        "images/SQL-StudentView.jpg",
+        "images/SQL-StudentView-Answered.jpg",
     )
 );

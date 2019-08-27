@@ -1,24 +1,24 @@
 <?php
 require_once "../../config.php";
-require_once "../dao/QW_DAO.php";
+require_once "../dao/SQL_DAO.php";
 
 use \Tsugi\Core\LTIX;
-use \QW\DAO\QW_DAO;
+use \SQL\DAO\SQL_DAO;
 
 // Retrieve the launch data if present
 $LAUNCH = LTIX::requireData();
 
 $p = $CFG->dbprefix;
 
-$QW_DAO = new QW_DAO($PDOX, $p);
+$SQL_DAO = new SQL_DAO($PDOX, $p);
 
 $question_id = isset($_GET["question_id"]) ? $_GET["question_id"] : false;
 
 if ( $USER->instructor && $question_id ) {
 
-    $QW_DAO->deleteQuestion($question_id);
+    $SQL_DAO->deleteQuestion($question_id);
 
-    $QW_DAO->fixUpQuestionNumbers($_SESSION["qw_id"]);
+    $SQL_DAO->fixUpQuestionNumbers($_SESSION["sql_id"]);
 
     header( 'Location: '.addSession('../instructor-home.php') ) ;
 } 

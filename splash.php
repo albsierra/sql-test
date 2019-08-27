@@ -1,20 +1,20 @@
 <?php
 require_once('../config.php');
-require_once('dao/QW_DAO.php');
+require_once('dao/SQL_DAO.php');
 
 use \Tsugi\Core\LTIX;
-use \QW\DAO\QW_DAO;
+use \SQL\DAO\SQL_DAO;
 
 // Retrieve the launch data if present
 $LAUNCH = LTIX::requireData();
 
 $p = $CFG->dbprefix;
 
-$QW_DAO = new QW_DAO($PDOX, $p);
+$SQL_DAO = new SQL_DAO($PDOX, $p);
 
-$skipSplash = $QW_DAO->skipSplash($USER->id);
+$skipSplash = $SQL_DAO->skipSplash($USER->id);
 
-$toolTitle = $QW_DAO->getMainTitle($_SESSION["qw_id"]);
+$toolTitle = $SQL_DAO->getMainTitle($_SESSION["sql_id"]);
 
 // Start of the output
 $OUTPUT->header();

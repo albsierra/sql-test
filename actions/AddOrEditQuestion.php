@@ -1,15 +1,15 @@
 <?php
 require_once "../../config.php";
-require_once('../dao/QW_DAO.php');
+require_once('../dao/SQL_DAO.php');
 
 use \Tsugi\Core\LTIX;
-use \QW\DAO\QW_DAO;
+use \SQL\DAO\SQL_DAO;
 
 $LAUNCH = LTIX::requireData();
 
 $p = $CFG->dbprefix;
 
-$QW_DAO = new QW_DAO($PDOX, $p);
+$SQL_DAO = new SQL_DAO($PDOX, $p);
 
 if ($USER->instructor) {
 
@@ -21,10 +21,10 @@ if ($USER->instructor) {
 
 	if ($questionId > -1) {
 	    // Existing question
-	    $QW_DAO->updateQuestion($questionId, $questionText, $currentTime);
+	    $SQL_DAO->updateQuestion($questionId, $questionText, $currentTime);
     } else {
 	    // New question
-        $QW_DAO->createQuestion($_SESSION["qw_id"], $questionText, $currentTime);
+        $SQL_DAO->createQuestion($_SESSION["sql_id"], $questionText, $currentTime);
     }
 
     header( 'Location: '.addSession('../instructor-home.php') ) ;
