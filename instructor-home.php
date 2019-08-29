@@ -114,7 +114,7 @@ $totalQuestions = count($questions);
                         <input type="hidden" name="questionId" id="questionId" value="-1">
                         <label for="questionDatabase">Question Database</label>
                         <input type="text" class="form-control" name="questionDatabase" value="" autofocus required >
-                        <label for="questionText">Question Text</label>
+                        <label for="questionTables">Question Tables</label>
                         <input type="text" class="form-control" name="questionTables" value="" required>
                         <label for="questionText">Question Text</label>
                         <textarea class="form-control" name="questionText" id="questionText" rows="4" required></textarea>

@@ -101,3 +101,8 @@ a.disabled, a.disabled:hover, a.disabled:focus, a.disabled:active {
     margin-left: 50px;
     font-weight: lighter;
 }
+
+div.list-group-item table, th, td {
+    border: solid blue 1px;
+    padding: 0 5px;
+}

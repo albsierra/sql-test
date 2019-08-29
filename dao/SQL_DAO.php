@@ -159,16 +159,34 @@ class SQL_DAO {
         return $context['modified'];
     }
 
-    function createAnswer($user_id, $question_id, $answer_txt, $current_time) {
-        $query = "INSERT INTO {$this->p}sql_answer (user_id, question_id, answer_txt, modified) VALUES (:userId, :questionId, :answerTxt, :currentTime);";
-        $arr = array(':userId' => $user_id,':questionId' => $question_id, ':answerTxt' => $answer_txt, ':currentTime' => $current_time);
+    function createAnswer($user_id, $question_id, $answer_txt, $answer_success, $current_time) {
+        $query = "INSERT INTO {$this->p}sql_answer 
+            (user_id, question_id, answer_txt, answer_success, modified) 
+            VALUES (:userId, :questionId, :answerTxt, :answerSuccess, :currentTime);";
+        $arr = array(
+            ':userId' => $user_id,
+            ':questionId' => $question_id,
+            ':answerTxt' => $answer_txt,
+            ':answerSuccess' => $answer_success,
+            ':currentTime' => $current_time
+        );
         $this->PDOX->queryDie($query, $arr);
         return $this->PDOX->lastInsertId();
     }
 
-    function updateAnswer($answer_id, $answer_txt, $current_time) {
-        $query = "UPDATE {$this->p}sql_answer set answer_txt = :answerTxt, modified = :currentTime where answer_id = :answerId;";
-        $arr = array(':answerId' => $answer_id, ':answerTxt' => $answer_txt, ':currentTime' => $current_time);
+    function updateAnswer($answer_id, $answer_txt, $answer_success, $current_time) {
+        $query = "UPDATE {$this->p}sql_answer 
+            set
+                answer_txt = :answerTxt,
+                answer_success = :answerSuccess,
+                modified = :currentTime 
+            where answer_id = :answerId;";
+        $arr = array(
+            ':answerId' => $answer_id,
+            ':answerTxt' => $answer_txt,
+            ':answerSuccess' => $answer_success,
+            ':currentTime' => $current_time
+        );
         $this->PDOX->queryDie($query, $arr);
     }
 
