@@ -7,21 +7,15 @@ class PDO_LOCAL {
     /*** mysql hostname ***/
     private $hostname = 'localhost';
 
-    /*** mysql username ***/
-    private $username = 'root';
-
-    /*** mysql password ***/
-    private $password = 'alumno';
-
     private $connection;
 
-    public function __construct($database) {
+    public function __construct($CFG, $database) {
         try {
             $this->connection =
                 new PDO(
                     "mysql:host=$this->hostname;dbname=$database",
-                    $this->username,
-                    $this->password
+                    $CFG->dbuser,
+                    $CFG->dbpass
                 );
             }
         catch(PDOException $e)

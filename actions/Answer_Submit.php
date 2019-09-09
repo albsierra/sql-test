@@ -25,7 +25,7 @@ for ($x = 1; $x < ($_POST["Total"]+1); $x++) {
     if ($answerText != '') {
         $question = $SQL_DAO->getQuestionById($questionId);
 
-        $PDO_LOCAL = new PDO_LOCAL($question['question_database']);
+        $PDO_LOCAL = new PDO_LOCAL($CFG, $question['question_database']);
         $answerSuccess = $PDO_LOCAL->gradeAnswer($answerText, $question['question_solution']);
         $totalScore += ($answerSuccess ? 1 : 0) ;
     }

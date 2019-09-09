@@ -60,7 +60,7 @@ $moreToSubmit = false;
                             $answerId = -1;
 
 
-                            $PDO_LOCAL = new PDO_LOCAL($question['question_database']);
+                            $PDO_LOCAL = new PDO_LOCAL($CFG, $question['question_database']);
                             $resultTable = $PDO_LOCAL->getQueryTable($question["question_solution"]);
 
                             $answer = $SQL_DAO->getStudentAnswerForQuestion($question_id, $USER->id);
