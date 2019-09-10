@@ -22,26 +22,31 @@ for ($x = 1; $x < ($_POST["Total"]+1); $x++) {
     $questionId = $_POST['QuestionID'.$x];
     $answerText = $_POST['A'.$x];
 
-    if ($answerText != '') {
+    if (strlen($answerText) > 0) {
         $question = $SQL_DAO->getQuestionById($questionId);
 
         $PDO_LOCAL = new PDO_LOCAL($CFG, $question['question_database']);
         $answerSuccess = $PDO_LOCAL->gradeAnswer($answerText, $question['question_solution']);
         $totalScore += ($answerSuccess ? 1 : 0) ;
-    }
 
-    if ($answerId > -1) {
-        // Existing answer check if it needs to be updated
-        $oldAnswer = $SQL_DAO->getAnswerById($answerId);
-
-        if ($answerText !== $oldAnswer['answer_txt']) {
-            // Answer has changed so update
-            $SQL_DAO->updateAnswer($answerId, $answerText, $answerSuccess, $currentTime);
+        if ($answerId > -1) {
+            // Existing answer check if it needs to be updated
+            $oldAnswer = $SQL_DAO->getAnswerById($answerId);
+    
+            if ($answerText !== $oldAnswer['answer_txt']) {
+                // Answer has changed so update
+                $SQL_DAO->updateAnswer($answerId, $answerText, $answerSuccess, $currentTime);
+            }
+        } else if ($answerText != '') {
+            // New answer
+            $SQL_DAO->createAnswer($USER->id, $questionId, $answerText, $answerSuccess, $currentTime);
         }
-    } else if ($answerText != '') {
-        // New answer
-        $SQL_DAO->createAnswer($USER->id, $questionId, $answerText, $answerSuccess, $currentTime);
+    } elseif($answerId > -1) {
+        $oldAnswer = $SQL_DAO->getAnswerById($answerId);
+        $totalScore += ($oldAnswer['answer_success'] ? 1 : 0) ;
     }
+
+
 }
 
 $totalScore = $totalScore / $_POST["Total"];
