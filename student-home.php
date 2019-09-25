@@ -71,7 +71,7 @@ $moreToSubmit = false;
                             }
 // TODO Show tables schemas
                             echo('<div class="list-group-item">
-                                <h4>'.$question["question_txt"].'</h4>
+                                <div>'.$question["question_txt"].'</div>
                                 <h5><b>Database:</b> '.$question["question_database"].'</h5>
                                 <h6><b>Tables:</b> '.$question["question_tables"].'</h6>' .
                                 $resultTable .
