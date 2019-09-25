@@ -66,7 +66,7 @@ $totalQuestions = count($questions);
                         $totalAnswers = $SQL_DAO->countAnswersForQuestion($question["question_id"]);
                         echo('
                         <div class="list-group-item">
-                            <h4 id="questionText'.$question["question_id"].'">'.$question["question_txt"].'</h4>
+                            <div id="questionText'.$question["question_id"].'">'.$question["question_txt"].'</div>
                             <h5 id="questionDatabase'.$question["question_id"].'"><b>Database:</b> '.$question["question_database"].'</h5>
                             <h6 id="questionTables'.$question["question_id"].'"><b>Tables:</b> '.$question["question_tables"].'</h4>
                             <form id="questionTextForm'.$question["question_id"].'" action="actions/AddOrEditQuestion.php" method="post" style="display:none;">
@@ -74,7 +74,7 @@ $totalQuestions = count($questions);
                                     <input type="hidden" name="questionId" value="'.$question["question_id"].'">
                                     <input type="text" name="questionDatabase" value="'.$question["question_database"].'">
                                     <input type="text" name="questionTables" value="'.$question["question_tables"].'">
-                                    <textarea class="form-control" name="questionText" rows="4" required>'.$question["question_txt"].'</textarea>
+                                    <textarea class="form-control" id="questionText" name="questionText" rows="4" required>'.$question["question_txt"].'</textarea>
                                     <textarea class="form-control" name="questionSolution" rows="4" required>'.$question["question_solution"].'</textarea>
                                 </p>
                                 <div class="text-right">
@@ -118,7 +118,7 @@ $totalQuestions = count($questions);
                         <input type="text" class="form-control" name="questionTables" value="" required>
                         <label for="questionText">Question Text</label>
                         <textarea class="form-control" name="questionText" id="questionText" rows="4" required></textarea>
-                        <label for="questionText">Question Solution</label>
+                        <label for="questionSolution">Question Solution</label>
                         <textarea class="form-control" name="questionSolution" id="questionSolution" rows="4" required></textarea>
                     </div>
                     <div class="modal-footer">
