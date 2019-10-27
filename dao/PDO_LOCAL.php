@@ -37,12 +37,12 @@ class PDO_LOCAL {
     }
 
     public function getQueryTable($query) {
-        $resultQueryString = "<table>";
+        $resultQueryString = "<div class='table-results'><table>";
         $resultQuery = $this->connection->prepare($query);
         $resultQuery->execute();
         $resultQueryString .= $this->getHeaderQueryTable($resultQuery);
         $resultQueryString .= $this->getBodyQueryTable($resultQuery);
-        $resultQueryString .= "</table>";
+        $resultQueryString .= "</table></div>";
         return $resultQueryString;
     }
 

@@ -106,3 +106,9 @@ div.list-group-item table, th, td {
     border: solid blue 1px;
     padding: 0 5px;
 }
+
+.table-results {
+    max-height: 300px;
+    max-width: 603px;
+    overflow: scroll;
+}
