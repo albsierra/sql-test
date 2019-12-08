@@ -33,6 +33,34 @@ if (!$toolTitle) {
 $questions = $SQL_DAO->getQuestions($SetID);
 $totalQuestions = count($questions);
 
+function orderQuestions($nQuestions) {
+    $arrayOrder = array();
+    $newOrder = array();
+    for($countQuestions = 1 ;$countQuestions <= $nQuestions; $countQuestions++) {
+        $following = rand(0, $nQuestions - $countQuestions);
+        for ($i = 0; ($i < $nQuestions) && ($following >= 0) ; $i++){
+            if(!isset($arrayOrder[$i])) $following--;
+        }
+        $arrayOrder[$i - 1] = $countQuestions -1;
+    }
+
+    foreach ($arrayOrder as $keyOrder => $elementOrder) {
+        $newOrder[$elementOrder] = $keyOrder;
+    }
+    return $newOrder;
+}
+
+function reorderQuestionsWithSessionOrder($questions, $newOrder) {
+    array_multisort($newOrder, $questions);
+    return $questions;
+}
+
+if(!isset($_SESSION['orderQuestions']) || !is_array($_SESSION['orderQuestions'])) {
+    $_SESSION['orderQuestions'] = orderQuestions($totalQuestions);
+}
+
+$questions = reorderQuestionsWithSessionOrder($questions, $_SESSION['orderQuestions']);
+
 $moreToSubmit = false;
 
 ?>
