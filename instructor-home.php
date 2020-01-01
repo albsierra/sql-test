@@ -68,14 +68,15 @@ $totalQuestions = count($questions);
                         <div class="list-group-item">
                             <div id="questionText'.$question["question_id"].'">'.$question["question_txt"].'</div>
                             <h5 id="questionDatabase'.$question["question_id"].'"><b>Database:</b> '.$question["question_database"].'</h5>
-                            <h6 id="questionTables'.$question["question_id"].'"><b>Tables:</b> '.$question["question_tables"].'</h4>
+                            <h6 id="questionType'.$question["question_id"].'"><b>Type:</b> '.$question["question_type"].'</h4>
                             <form id="questionTextForm'.$question["question_id"].'" action="actions/AddOrEditQuestion.php" method="post" style="display:none;">
                                 <p>
                                     <input type="hidden" name="questionId" value="'.$question["question_id"].'">
                                     <input type="text" name="questionDatabase" value="'.$question["question_database"].'">
-                                    <input type="text" name="questionTables" value="'.$question["question_tables"].'">
+                                    <input type="text" name="questionType" value="'.$question["question_type"].'">
                                     <textarea class="form-control ckeditor" id="questionText" name="questionText" rows="4" required>'.$question["question_txt"].'</textarea>
                                     <textarea class="form-control" name="questionSolution" rows="4" required>'.$question["question_solution"].'</textarea>
+                                    <textarea class="form-control" name="questionProbe" rows="4" required>'.$question["question_probe"].'</textarea>
                                 </p>
                                 <div class="text-right">
                                     <input type="submit" class="btn btn-success" value="Save" form="questionTextForm'.$question["question_id"].'">
@@ -114,12 +115,14 @@ $totalQuestions = count($questions);
                         <input type="hidden" name="questionId" id="questionId" value="-1">
                         <label for="questionDatabase">Question Database</label>
                         <input type="text" class="form-control" name="questionDatabase" value="" autofocus required >
-                        <label for="questionTables">Question Tables</label>
-                        <input type="text" class="form-control" name="questionTables" value="" required>
+                        <label for="questionType">Question Type</label>
+                        <input type="text" class="form-control" name="questionType" value="" required>
                         <label for="questionText">Question Text</label>
                         <textarea class="form-control ckeditor" name="questionText" id="questionText" rows="4" required></textarea>
                         <label for="questionSolution">Question Solution</label>
                         <textarea class="form-control" name="questionSolution" id="questionSolution" rows="4" required></textarea>
+                        <label for="questionProbe">Question Probe</label>
+                        <textarea class="form-control" name="questionProbe" id="questionProbe" rows="4" required></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>

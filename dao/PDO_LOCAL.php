@@ -24,19 +24,20 @@ class PDO_LOCAL {
             }
     }
 
-    public function gradeAnswer($queryAnswer, $querySolution) {
+    public function gradeAnswer($queryAnswer, $querySolution, $queryProbe = null) {
         return $this->compareQueries(
             $queryAnswer,
-            $querySolution
+            $querySolution,
+            $queryProbe
         );
     }
 
-    private function compareQueries($resultAnswer, $resultSolution) {
+    private function compareQueries($resultAnswer, $resultSolution, $resultProbe = null) {
         return
-            $this->getQueryTable($resultAnswer) === $this->getQueryTable($resultSolution) ? 1 : 0;
+            $this->getQueryTable($resultAnswer, $resultProbe) === $this->getQueryTable($resultSolution, $resultProbe) ? 1 : 0;
     }
 
-    public function getQueryTable($query) {
+    public function getQueryTable($query, $resultProbe = null) {
         $resultQueryString = "<div class='table-results'><table>";
         $resultQuery = $this->connection->prepare($query);
         $resultQuery->execute();

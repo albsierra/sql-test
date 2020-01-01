@@ -54,7 +54,7 @@ $OUTPUT->bodyStart();
                 <div class="list-group-item">
                     <h4><?php echo($question["question_txt"]); ?></h4>
                     <h5><b>Database: </b><?php echo($question["question_database"]); ?></h5>
-                    <h6><b>Tables: </b><?php echo($question["question_tables"]); ?></h6>
+                    <h6><b>Type: </b><?php echo($question["question_type"]); ?></h6>
                 </div>
                 <?php
                 foreach ($answers as $answer) {

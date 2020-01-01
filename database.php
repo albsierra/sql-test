@@ -63,3 +63,22 @@ $DATABASE_INSTALL = array(
     
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8")
 );
+
+$DATABASE_UPGRADE = function($oldversion) {
+    global $CFG, $PDOX;
+
+    // Adding DML questions and changing question_tables to question_type 2020-01-01
+    if ( $PDOX->columnExists('question_tables', "{$CFG->dbprefix}sql_question") ) {
+        $sql= "ALTER TABLE {$CFG->dbprefix}sql_question
+                DROP question_tables, 
+                ADD question_type VARCHAR(20) DEFAULT 'SELECT',
+                ADD question_probe TEXT NULL";
+        echo("Upgrading: ".$sql."<br/>\n");
+        error_log("Upgrading: ".$sql);
+        $q = $PDOX->queryReturnError($sql);
+    }
+    // When you increase this number in any database.php file,
+    // make sure to update the global value in setup.php
+    return 201907070902;
+
+}; // Don't forget the semicolon on anonymous functions :)

@@ -59,9 +59,10 @@ $moreToSubmit = false;
                             $question_id = $question["question_id"];
                             $answerId = -1;
 
-
+// TODO elegir correctamente resultTable
                             $PDO_LOCAL = new PDO_LOCAL($CFG, $question['question_database']);
                             $resultTable = $PDO_LOCAL->getQueryTable($question["question_solution"]);
+                            $resultProbe = $PDO_LOCAL->getQueryTable($question["question_probe"]);
 
                             $answer = $SQL_DAO->getStudentAnswerForQuestion($question_id, $USER->id);
 
@@ -69,11 +70,11 @@ $moreToSubmit = false;
                                 $answerId = $answer['answer_id'];
                                 $answerText = $answer['answer_txt'];
                             }
-// TODO Show tables schemas
+
                             echo('<div class="list-group-item">
                                 <div>'.$question["question_txt"].'</div>
                                 <h5><b>Database:</b> '.$question["question_database"].'</h5>
-                                <h6><b>Tables:</b> '.$question["question_tables"].'</h6>' .
+                                <h6><b>Type:</b> '.$question["question_type"].'</h6>' .
                                 $resultTable .
                                 '<p>');
 

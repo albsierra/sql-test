@@ -4,9 +4,10 @@ $(document).ready(function(){
     var addModal = $("#addOrEditQuestion");
     addModal.on('hidden.bs.modal', function() {
         $("#questionDatabase").val('');
-        $("#questionTables").val('');
+        $("#questionType").val('');
         $("#questionText").val('');
         $("#questionSolution").val('');
+        $("#questionProbe").val('');
     });
     addModal.on('shown.bs.modal', function() {
         $("#questionText").focus();

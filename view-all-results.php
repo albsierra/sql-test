@@ -90,7 +90,7 @@ $StudentList = $SQL_DAO->getUsersWithAnswers($mainId);
                                         <br />
                                         <b>Database:</b>'.$question["question_database"].'
                                         <br />
-                                        <b>Tables:</b>'.$question["question_tables"].'
+                                        <b>Type:</b>'.$question["question_type"].'
                                        </td>');
 
                                 if ($firstQuestion) {

@@ -15,19 +15,20 @@ if ($USER->instructor) {
 
     $questionId = $_POST["questionId"];
     $questionDatabase = $_POST["questionDatabase"];
-    $questionTables = $_POST["questionTables"];
+    $questionType = $_POST["questionType"];
     $questionText = $_POST["questionText"];
     $questionSolution = $_POST["questionSolution"];
+    $questionProbe = $_POST["questionProbe"];
 
     $currentTime = new DateTime('now', new DateTimeZone($CFG->timezone));
     $currentTime = $currentTime->format("Y-m-d H:i:s");
 
 	if ($questionId > -1) {
 	    // Existing question
-	    $SQL_DAO->updateQuestion($questionId, $questionDatabase, $questionTables, $questionText, $questionSolution, $currentTime);
+	    $SQL_DAO->updateQuestion($questionId, $questionDatabase, $questionType, $questionText, $questionSolution, $questionProbe, $currentTime);
     } else {
 	    // New question
-        $SQL_DAO->createQuestion($_SESSION["sql_id"], $questionDatabase, $questionTables, $questionText, $questionSolution, $currentTime);
+        $SQL_DAO->createQuestion($_SESSION["sql_id"], $questionDatabase, $questionType, $questionText, $questionSolution, $questionProbe, $currentTime);
     }
 
     header( 'Location: '.addSession('../instructor-home.php') ) ;

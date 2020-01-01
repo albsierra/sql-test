@@ -78,38 +78,41 @@ class SQL_DAO {
         return $this->PDOX->rowDie($query, $arr);
     }
 
-    function createQuestion($sql_id, $question_database, $question_tables, $question_text, $question_solution, $current_time) {
+    function createQuestion($sql_id, $question_database, $question_type, $question_text, $question_solution, $question_probe, $current_time) {
         $nextNumber = $this->getNextQuestionNumber($sql_id);
         $query = "INSERT INTO {$this->p}sql_question 
-            (sql_id, question_num, question_database, question_tables, question_txt, question_solution, modified) 
-            VALUES (:sqlId, :questionNum, :questionDatabase, :questionTables, :questionText, :questionSolution, :currentTime);";
+            (sql_id, question_num, question_database, question_type, question_txt, question_solution, question_probe, modified) 
+            VALUES (:sqlId, :questionNum, :questionDatabase, :questionType, :questionText, :questionSolution, :questionProbe, :currentTime);";
         $arr = array(
             ':sqlId' => $sql_id,
             ':questionNum' => $nextNumber,
             ':questionDatabase' => $question_database,
-            ':questionTables' => $question_tables,
+            ':questionType' => $question_type,
             ':questionText' => $question_text,
             ':questionSolution' => $question_solution,
+            ':questionProbe' => $question_probe,
             ':currentTime' => $current_time
         );
         $this->PDOX->queryDie($query, $arr);
         return $this->PDOX->lastInsertId();
     }
 
-    function updateQuestion($question_id, $question_database, $question_tables, $question_text, $question_solution, $current_time) {
+    function updateQuestion($question_id, $question_database, $question_type, $question_text, $question_solution, $question_probe, $current_time) {
         $query = "UPDATE {$this->p}sql_question SET
             question_database = :questionDatabase, 
-            question_tables = :questionTables, 
+            question_type = :questionType, 
             question_txt = :questionText, 
             question_solution = :questionSolution, 
+            question_probe = :questionProbe, 
             modified = :currentTime 
             WHERE question_id = :questionId;";
         $arr = array(
             ':questionId' => $question_id,
             ':questionDatabase' => $question_database,
-            ':questionTables' => $question_tables,
+            ':questionType' => $question_type,
             ':questionText' => $question_text,
             ':questionSolution' => $question_solution,
+            ':questionProbe' => $question_probe,
             ':currentTime' => $current_time
         );
         $this->PDOX->queryDie($query, $arr);
