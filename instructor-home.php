@@ -72,11 +72,18 @@ $totalQuestions = count($questions);
                             <form id="questionTextForm'.$question["question_id"].'" action="actions/AddOrEditQuestion.php" method="post" style="display:none;">
                                 <p>
                                     <input type="hidden" name="questionId" value="'.$question["question_id"].'">
+                                    <label for="questionDatabase">Question Database</label>
                                     <input type="text" name="questionDatabase" value="'.$question["question_database"].'">
-                                    <input type="text" name="questionType" value="'.$question["question_type"].'">
+                                    <label for="questionType">Question Type</label>
+                                    <select name="questionType" id="questionType">
+                                        <option value="SELECT" ' . ($question["question_type"] == 'SELECT' ? "selected" : "") . '>SELECT</option>
+                                        <option value="DML" ' . ($question["question_type"] == 'DML' ? "selected" : "") . '>DML</option>
+                                    </select>
                                     <textarea class="form-control ckeditor" id="questionText" name="questionText" rows="4" required>'.$question["question_txt"].'</textarea>
+                                    <label for="questionSolution">Question Solution</label>
                                     <textarea class="form-control" name="questionSolution" rows="4" required>'.$question["question_solution"].'</textarea>
-                                    <textarea class="form-control" name="questionProbe" rows="4" required>'.$question["question_probe"].'</textarea>
+                                    <label for="questionProbe">Question Probe</label>
+                                    <textarea class="form-control" name="questionProbe" rows="4">'.$question["question_probe"].'</textarea>
                                 </p>
                                 <div class="text-right">
                                     <input type="submit" class="btn btn-success" value="Save" form="questionTextForm'.$question["question_id"].'">
@@ -116,13 +123,17 @@ $totalQuestions = count($questions);
                         <label for="questionDatabase">Question Database</label>
                         <input type="text" class="form-control" name="questionDatabase" value="" autofocus required >
                         <label for="questionType">Question Type</label>
-                        <input type="text" class="form-control" name="questionType" value="" required>
+                        <select name="questionType" id="questionType">
+                            <option value="SELECT" >SELECT</option>
+                            <option value="DML" >DML</option>
+                        </select>
+                        <br />
                         <label for="questionText">Question Text</label>
                         <textarea class="form-control ckeditor" name="questionText" id="questionText" rows="4" required></textarea>
                         <label for="questionSolution">Question Solution</label>
                         <textarea class="form-control" name="questionSolution" id="questionSolution" rows="4" required></textarea>
                         <label for="questionProbe">Question Probe</label>
-                        <textarea class="form-control" name="questionProbe" id="questionProbe" rows="4" required></textarea>
+                        <textarea class="form-control" name="questionProbe" id="questionProbe" rows="4"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
