@@ -37,13 +37,17 @@ class PDO_LOCAL {
             $this->getQueryTable($resultAnswer, $resultProbe) === $this->getQueryTable($resultSolution, $resultProbe) ? 1 : 0;
     }
 
-    public function getQueryTable($query, $resultProbe = null) {
-        $resultQueryString = "<div class='table-results'><table>";
-        $resultQuery = $this->connection->prepare($query);
-        $resultQuery->execute();
-        $resultQueryString .= $this->getHeaderQueryTable($resultQuery);
-        $resultQueryString .= $this->getBodyQueryTable($resultQuery);
-        $resultQueryString .= "</table></div>";
+    public function getQueryTable($question) {
+        $resultQueryString = '';
+        if ($question['question_type'] == 'SELECT') {
+            $query = $question['question_solution'];
+            $resultQueryString = "<div class='table-results'><table>";
+            $resultQuery = $this->connection->prepare($query);
+            $resultQuery->execute();
+            $resultQueryString .= $this->getHeaderQueryTable($resultQuery);
+            $resultQueryString .= $this->getBodyQueryTable($resultQuery);
+            $resultQueryString .= "</table></div>";
+        }
         return $resultQueryString;
     }
 

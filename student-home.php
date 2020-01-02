@@ -59,10 +59,8 @@ $moreToSubmit = false;
                             $question_id = $question["question_id"];
                             $answerId = -1;
 
-// TODO elegir correctamente resultTable
                             $PDO_LOCAL = new PDO_LOCAL($CFG, $question['question_database']);
-                            $resultTable = $PDO_LOCAL->getQueryTable($question["question_solution"]);
-                            $resultProbe = $PDO_LOCAL->getQueryTable($question["question_probe"]);
+                            $resultTable = $PDO_LOCAL->getQueryTable($question);
 
                             $answer = $SQL_DAO->getStudentAnswerForQuestion($question_id, $USER->id);
 
