@@ -24,17 +24,31 @@ class PDO_LOCAL {
             }
     }
 
-    public function gradeAnswer($queryAnswer, $querySolution, $queryProbe = null) {
+    public function gradeAnswer($queryAnswer, $question) {
         return $this->compareQueries(
             $queryAnswer,
-            $querySolution,
-            $queryProbe
+            $question
         );
     }
 
-    private function compareQueries($resultAnswer, $resultSolution, $resultProbe = null) {
+    private function compareQueries($resultAnswer, $question) {
         return
-            $this->getQueryTable($resultAnswer, $resultProbe) === $this->getQueryTable($resultSolution, $resultProbe) ? 1 : 0;
+            $this->getQueryResult($question, $resultAnswer) === $this->getQueryResult($question) ? 1 : 0;
+    }
+
+    private function getQueryResult($question, $resultAnswer = null) {
+        $this->connection->beginTransaction();
+        $query = (isset($resultAnswer) ? $resultAnswer : $question['question_solution']);
+        $resultQuery = $this->connection->prepare($query);
+        $resultQuery->execute();
+        if ($question['question_type'] == 'DML') {
+            $query = $question['question_probe'];
+            $resultQuery = $this->connection->prepare($query);
+            $resultQuery->execute();
+        }
+        $resultArray = $resultQuery->fetchAll();
+        $this->connection->rollBack();
+        return $resultArray;
     }
 
     public function getQueryTable($question) {
